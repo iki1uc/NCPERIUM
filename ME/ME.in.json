@@ -1,0 +1,10 @@
+{
+  "PORT": "IN",
+  "TYPE": "ME-IN",
+  "RAW": "CLEAN",
+  "STATUS": "READY",
+  "MATRIX": "3x3",
+  "SOURCE": "USER-INPUT",
+  "TARGET": "NCPERIUM-IN",
+  "TIMESTAMP": "AUTO"
+}
