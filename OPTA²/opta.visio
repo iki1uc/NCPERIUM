@@ -1,1 +1,14 @@
+{
+  "layer": "OPTA2",
+  "type": "ability",
+  "modules": [
+    "RAW",
+    "META",
+    "ULTRA",
+    "ROOT",
+    "SCAN",
+    "GHOST",
+    "RESPO"
+  ]
+}
 
