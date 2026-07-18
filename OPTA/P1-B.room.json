@@ -1,0 +1,6 @@
+{
+  "module": "room",
+  "layer": "OPTA",
+  "active": true,
+  "capacity": 3
+}
