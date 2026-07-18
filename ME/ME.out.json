@@ -1,0 +1,10 @@
+{
+  "PORT": "OUT",
+  "TYPE": "ME-OUT",
+  "RAW": "HOLO",
+  "STATUS": "COMPLETE",
+  "MATRIX": "9x9",
+  "SOURCE": "NCPERIUM-OUT",
+  "TARGET": "MA3-ENGINE",
+  "TIMESTAMP": "AUTO"
+}
