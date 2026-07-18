@@ -1,0 +1,9 @@
+{
+  "module": "core",
+  "layer": "OPTA",
+  "status": "ready",
+  "mxu": 0,
+  "miss": 0,
+  "error": 0,
+  "room": 0
+}
