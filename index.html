@@ -1,56 +1,85 @@
-<!DOCTYPE ULTRA3.0>
-<ULTRA3.0.ENGINE>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>META‑Index – U/Q/T/H/B</title>
 
-    <STATE>ACTIVE</STATE>
-    <MODE>AUTO</MODE>
-    <VERSION>3.0 TRUE FULL</VERSION>
+<style>
+body { font-family: Arial; background:#0b0b0b; color:#e6e6e6; padding:20px; }
+h1 { color:#4cc3ff; }
+h2 { color:#6cf; margin-top:30px; }
+a { color:#4cc3ff; text-decoration:none; }
+a:hover { text-decoration:underline; }
+ul { list-style:none; padding:0; }
+li { padding:4px 0; border-bottom:1px solid #333; }
+</style>
+</head>
 
-    <CORE>o_meta(x)</CORE>
-    <PIPE>h1 → e3 → o6 → o9 → b12 → w128 → win∞</PIPE>
+<body>
+<h1>META‑Index – ACTIVE AUTO 3.0 TRUE FULL</h1>
+<p>Scan: U → Q → T → H → B (X/Y ignoriert)</p>
 
-    <AXIS>X Y Z U V W</AXIS>
-    <VECTOR>horizont breite tiefe ultra wert</VECTOR>
+<script>
+const folders = ["U", "Q", "T", "H", "B"];
+const metaRooms = [
+  "METAh.room",
+  "METAb.room",
+  "METAt.room",
+  "META360.room",
+  "META2.html",
+  "META3.html"
+];
 
-    <CHAIN>
-        h1 + e3 + o6 + o9 + b12 + w128 +
-        nano + atom + raw + operator +
-        rev1.0 + beat∞ + win∞ +
-        xarg + ghosterror + 7sinn
-    </CHAIN>
+async function scanFolder(folder) {
+  try {
+    const res = await fetch(folder + "/");
+    if (!res.ok) return;
 
-    <FUSION>
-        win∞(rev1.0(beat∞(o9(o6(e3(h1(x)))))))
-    </FUSION>
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const links = [...doc.querySelectorAll("a")];
 
-    <ZERO>
-        zero-core
-        zero-ultra
-        ultra-zero
-    </ZERO>
+    const section = document.createElement("div");
+    section.innerHTML = `<h2>${folder}</h2><ul></ul>`;
+    const ul = section.querySelector("ul");
 
-    <HTML.MATRIX>
-        1.html 3.html 6.html 9.html 12.html
-        RAUM³.html 698869.html gitter.html cluster.html
-    </HTML.MATRIX>
+    links.forEach(link => {
+      const name = link.textContent.trim();
+      if (name !== "../") {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${folder}/${link.getAttribute("href")}">${name}</a>`;
+        ul.appendChild(li);
+      }
+    });
 
-    <OCTA3>
-        server web net script js html css dom
-    </OCTA3>
+    document.body.appendChild(section);
+  } catch (e) {}
+}
 
-    <HELP>
-        help.me error.me ghost.me
-    </HELP>
+async function scanMeta() {
+  const section = document.createElement("div");
+  section.innerHTML = `<h2>META‑Räume</h2><ul></ul>`;
+  const ul = section.querySelector("ul");
 
-    <PCTA3>24X</PCTA3>
-    <RECALL>>=91%</RECALL>
+  metaRooms.forEach(async room => {
+    try {
+      const res = await fetch(room);
+      if (res.ok) {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${room}">${room}</a>`;
+        ul.appendChild(li);
+      }
+    } catch (e) {}
+  });
 
-    <META.ROOMS>
-        <FILE>[METAh.room](ca://s?q=Open_METAh_room)</FILE>
-        <FILE>[METAb.room](ca://s?q=Open_METAb_room)</FILE>
-        <FILE>[METAt.room](ca://s?q=Open_METAt_room)</FILE>
-        <FILE>[META360.room](ca://s?q=Open_META360_room)</FILE>
-        <FILE>[META2.html](ca://s?q=Open_META2_html)</FILE>
-        <FILE>[META3.html](ca://s?q=Open_META3_html)</FILE>
-    </META.ROOMS>
+  document.body.appendChild(section);
+}
 
-</ULTRA3.0.ENGINE>
+folders.forEach(scanFolder);
+scanMeta();
+</script>
+
+</body>
+</html>
