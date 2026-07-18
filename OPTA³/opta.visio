@@ -1,1 +1,10 @@
-
+{
+  "layer": "OPTA3",
+  "type": "ai",
+  "modules": [
+    "64",
+    "81",
+    "FIX360",
+    "QI_IQQ"
+  ]
+}
