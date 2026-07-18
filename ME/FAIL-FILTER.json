@@ -1,1 +1,11 @@
-
+{
+  "threshold": 7,
+  "rules": {
+    "MISS": ">7",
+    "ERROR": ">7",
+    "RAW": "<7",
+    "ROOM": "<7",
+    "QI": "<7"
+  },
+  "failStations": []
+}
